@@ -162,13 +162,15 @@ pre code {
 
 /* 按钮样式 */
 .button {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     background-color: var(--vscode-blue);
     color: #000000;
     padding: var(--spacing-sm) var(--spacing-lg);
     border-radius: var(--border-radius);
     font-weight: 500;
-    font-size: 0.875rem;
+    font-size: 1rem;
     transition: all 0.2s ease;
     box-shadow: var(--shadow-1);
     border: none;
@@ -177,8 +179,14 @@ pre code {
     position: relative;
 }
 
+.button-icon {
+    width: 20px;
+    height: 20px;
+}
+
 .button:hover {
     background-color: #78d0ff;
+    color: #2c2c2c;
     box-shadow: var(--shadow-2);
     transform: translateY(-1px);
 }
@@ -237,13 +245,15 @@ pre code {
 
 /* 优化的返回首页按钮样式 */
 .back-button {
-    display: inline-block;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
     background-color: var(--vscode-green);
     color: #000000;
     padding: var(--spacing-sm) var(--spacing-lg);
     border-radius: var(--border-radius);
     font-weight: 500;
-    font-size: 0.875rem;
+    font-size: 1rem;
     transition: all 0.2s ease;
     box-shadow: var(--shadow-1);
     border: none;
@@ -255,6 +265,7 @@ pre code {
 
 .back-button:hover {
     background-color: #78e0c9;
+    color: #2c2c2c;
     box-shadow: var(--shadow-2);
     transform: translateY(-1px);
 }
@@ -298,6 +309,11 @@ pre code {
     position: relative;
     overflow: hidden;
     border-bottom: 1px solid var(--vscode-border);
+}
+
+.gemini-icon {
+    margin: 0 auto 16px;
+    display: block;
 }
 
 .hero h1 {
