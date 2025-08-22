@@ -1,0 +1,1008 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gemini-CLI 终极教程 | 从入门到精通</title>
+    <meta name="description" content="完整的Gemini-CLI使用教程，从安装配置到高级技巧，助您快速掌握AI编程助手">
+    <link rel="icon"
+        href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>🤖</text></svg>">
+    <link rel="stylesheet" href="styles.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+        rel="stylesheet">
+</head>
+
+<body>
+    <!-- 背景粒子效果 -->
+    <div class="particles-bg" id="particles-bg"></div>
+
+    <!-- 导航栏 -->
+    <nav class="navbar">
+        <div class="nav-container">
+            <div class="nav-brand">
+                <span class="brand-icon">🤖</span>
+                <span class="brand-text">Gemini-CLI 教程</span>
+            </div>
+            <div class="nav-menu">
+                <a href="#introduction" class="nav-link">简介</a>
+                <a href="#installation" class="nav-link">安装</a>
+                <a href="#interaction" class="nav-link">交互</a>
+                <a href="#commands" class="nav-link">命令</a>
+                <a href="#advanced" class="nav-link">进阶</a>
+                <a href="#faq" class="nav-link">FAQ</a>
+            </div>
+            <div class="nav-toggle" id="navToggle">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
+        </div>
+    </nav>
+
+    <!-- 侧边栏目录 -->
+    <aside class="sidebar" id="sidebar">
+        <div class="sidebar-content">
+
+            <nav class="toc">
+                <div class="toc-item">
+                    <a href="#introduction" class="toc-link">前言</a>
+                </div>
+                <div class="toc-item">
+                    <a href="#installation" class="toc-link">第一部分：安装与启动</a>
+                </div>
+                <div class="toc-item">
+                    <a href="#interaction" class="toc-link">第二部分：交互模式</a>
+                </div>
+                <div class="toc-item">
+                    <a href="#commands" class="toc-link">第三部分：斜杠命令</a>
+                </div>
+                <div class="toc-item">
+                    <a href="#advanced" class="toc-link">第四部分：高级技巧</a>
+                </div>
+                <div class="toc-item">
+                    <a href="#customization" class="toc-link">第五部分：深度自定义</a>
+                </div>
+                <div class="toc-item">
+                    <a href="#faq" class="toc-link">第六部分：FAQ</a>
+                </div>
+            </nav>
+        </div>
+    </aside>
+
+    <!-- 主内容区域 -->
+    <main class="main-content">
+        <!-- 英雄区域 -->
+        <section class="hero">
+            <div class="hero-content">
+                <h1 class="hero-title">
+                    <span class="gradient-text">Gemini-CLI 终极教程</span>
+                    <span class="subtitle">从入门到精通</span>
+                </h1>
+                <p class="hero-description">
+                    掌握强大的AI编程助手，提升开发效率，释放编程潜力
+                </p>
+                <div class="hero-actions">
+                    <a href="#installation" class="btn btn-primary">开始学习</a>
+                    <a href="https://github.com/google/gemini-cli" class="btn btn-secondary" target="_blank">
+                        <span>GitHub</span>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor"
+                            stroke-width="2">
+                            <path d="M7 17L17 7M17 7H7M17 7V17" />
+                        </svg>
+                    </a>
+                </div>
+            </div>
+            <div class="hero-visual">
+                <div class="terminal-demo">
+                    <div class="terminal-header">
+                        <div class="terminal-buttons">
+                            <span class="btn-close"></span>
+                            <span class="btn-minimize"></span>
+                            <span class="btn-maximize"></span>
+                        </div>
+                        <div class="terminal-title">Gemini-CLI</div>
+                    </div>
+                    <div class="terminal-body">
+                        <div class="terminal-line">
+                            <span class="prompt">$</span>
+                            <span class="command">gemini</span>
+                        </div>
+                        <div class="terminal-line output">
+                            <span class="typing-text">欢迎使用 Gemini-CLI！您的AI编程伙伴已准备就绪。</span>
+                        </div>
+                        <div class="terminal-line">
+                            <span class="prompt">></span>
+                            <span class="cursor">|</span>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 特性卡片 -->
+        <section class="features">
+            <div class="container">
+                <div class="features-grid">
+                    <div class="feature-card">
+                        <div class="feature-icon">🚀</div>
+                        <h3>终端原生</h3>
+                        <p>直接在您熟悉的终端环境中使用，无需切换窗口，保持专注</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🧠</div>
+                        <h3>深度上下文</h3>
+                        <p>通过@命令和GEMINI.MD文件深刻理解您的项目结构和编码规范</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔧</div>
+                        <h3>自主代理</h3>
+                        <p>内置工具集能够读写文件、执行命令、搜索网络，完成复杂任务</p>
+                    </div>
+                    <div class="feature-card">
+                        <div class="feature-icon">🔌</div>
+                        <h3>IDE集成</h3>
+                        <p>与VS Code等编辑器无缝协作，提供代码修改的可视化比对</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 内容区域 -->
+        <div class="content-wrapper">
+            <article class="content">
+                <!-- 前言 -->
+                <section id="introduction" class="section">
+                    <h2>前言：为什么选择 Gemini-CLI？</h2>
+                    <p>在众多 AI 工具中，Gemini-CLI 凭借其独特的设计理念和强大的功能集脱颖而出：</p>
+
+                    <div class="highlight-box">
+                        <ul class="feature-list">
+                            <li><strong>终端原生</strong>: 它直接存在于您最熟悉的开发环境——终端中，无需切换窗口，实现了沉浸式、高效的工作流。</li>
+                            <li><strong>深度上下文感知</strong>: 通过 <code>@</code> 命令、<code>GEMINI.MD</code> 文件以及与 IDE
+                                的集成，它能深刻理解您的项目结构、代码库和编码规范。</li>
+                            <li><strong>强大的自主代理能力</strong>: 它不仅能聊天，还能通过内置工具集读写文件、执行命令、搜索网络，并利用推理循环（ReAct loop）来完成修复
+                                Bug、构建新功能等复杂任务。</li>
+                            <li><strong>IDE 深度集成</strong>: 与 VS Code
+                                等编辑器无缝协作，能够感知您当前打开的文件和选中的代码，并直接在编辑器中提供代码修改的可视化比对（diffing）。</li>
+                            <li><strong>高度可扩展</strong>: 支持通过自定义命令进行功能扩展，您可以根据自己的需求，打造专属的自动化工具。</li>
+                        </ul>
+                    </div>
+                </section>
+
+                <!-- 第一部分：安装与初次启动 -->
+                <section id="installation" class="section">
+                    <h2>第一部分：安装与初次启动</h2>
+
+                    <div class="subsection">
+                        <h3>1. 环境准备</h3>
+                        <p>在安装前，请确保您的系统已安装 <strong>Node.js (推荐 v20 或更高版本)</strong> 和 npm。您可以在终端运行以下命令来检查：</p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-title">检查环境</span>
+                                <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            </div>
+                            <pre><code class="language-bash">node -v
+npm -v</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>2. 全局安装</h3>
+                        <p>打开您的终端，运行以下命令进行全局安装：</p>
+                        <div class="code-block">
+                            <div class="code-header">
+                                <span class="code-title">安装命令</span>
+                                <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                            </div>
+                            <pre><code class="language-bash">npm install -g @google/gemini-cli</code></pre>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>3. 首次运行与认证</h3>
+                        <p>安装成功后，在终端输入 <code>gemini</code> 并按回车。首次运行时，它会引导您完成认证：</p>
+                        <div class="step-list">
+                            <div class="step-item">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    <strong>选择认证方式</strong>: 推荐选择 "Login with Google"。
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    <strong>浏览器授权</strong>: 您的浏览器将自动打开一个 Google 登录和授权页面。
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <strong>完成返回</strong>: 完成授权后，返回终端，您就可以开始与 Gemini 对话了。
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 第二部分：核心交互模式 -->
+                <section id="interaction" class="section">
+                    <h2>第二部分：核心交互模式</h2>
+                    <p>掌握与 Gemini-CLI 交互的三种基本方式是高效使用的关键：</p>
+
+                    <div class="interaction-modes">
+                        <div class="mode-card">
+                            <div class="mode-icon">💬</div>
+                            <h4>自然语言提示</h4>
+                            <p>这是最基础的交互方式。直接输入您的问题或指令，就像聊天一样。</p>
+                            <div class="code-block">
+                                <pre><code>请帮我用 Python 写一个快速排序算法。</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="mode-card">
+                            <div class="mode-icon">📂</div>
+                            <h4>@ 命令：文件/目录上下文注入</h4>
+                            <p>使用 <code>@</code> 符号，可以将本地文件或整个目录的内容作为上下文提供给 Gemini。</p>
+                            <div class="code-block">
+                                <pre><code>请根据 @./src/utils.js 文件中的代码风格，为这个新函数添加注释。</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="mode-card">
+                            <div class="mode-icon">⚡</div>
+                            <h4>! 命令：直接执行 Shell 命令</h4>
+                            <p>使用 <code>!</code> 符号，可以直接在 CLI 内部执行任何终端命令，无需退出。</p>
+                            <div class="code-block">
+                                <pre><code>!git status</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 第三部分：斜杠命令 -->
+                <section id="commands" class="section">
+                    <h2>第三部分：斜杠(/)命令终极解析</h2>
+                    <p>斜杠 (<code>/</code>) 命令是控制和管理 Gemini-CLI 的核心。</p>
+
+                    <div class="subsection">
+                        <h3>一、会话与历史管理</h3>
+                        <div class="command-grid">
+                            <div class="command-card">
+                                <h4><code>/chat</code></h4>
+                                <p>管理对话会话的生命周期</p>
+                                <ul class="command-list">
+                                    <li><code>/chat save &lt;tag&gt;</code>: 保存当前完整的对话状态</li>
+                                    <li><code>/chat resume &lt;tag&gt;</code>: 恢复一个之前保存的对话</li>
+                                    <li><code>/chat list</code>: 列出所有已保存的会话标签</li>
+                                    <li><code>/chat clear</code>: 清空当前对话的历史记录</li>
+                                </ul>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/history</code></h4>
+                                <p>查看当前对话的详细历史记录</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/compress</code></h4>
+                                <p>将当前冗长的对话历史压缩成一个简洁的摘要，以节省 Token</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/copy</code></h4>
+                                <p>将 Gemini 的上一个回答完整地复制到您的系统剪贴板中</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/clear</code></h4>
+                                <p>清空终端屏幕（视觉操作，不影响会话数据）</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>二、上下文与记忆管理</h3>
+                        <div class="command-grid">
+                            <div class="command-card">
+                                <h4><code>/memory</code></h4>
+                                <p>管理从 <code>GEMINI.MD</code> 文件中加载的长期记忆</p>
+                                <ul class="command-list">
+                                    <li><code>/memory show</code>: 显示当前所有已加载的文件内容</li>
+                                    <li><code>/memory refresh</code>: 重新加载所有记忆文件</li>
+                                    <li><code>/memory add "&lt;text&gt;"</code>: 临时向当前会话添加文本指令</li>
+                                </ul>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/context</code></h4>
+                                <p>查看当前完整的上下文</p>
+                                <ul class="command-list">
+                                    <li><code>/context show</code>: 显示即将发送给模型的所有信息</li>
+                                </ul>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/directory</code></h4>
+                                <p>管理工作区目录，用于指定和切换 Gemini-CLI 的工作环境</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>三、工具与集成</h3>
+                        <div class="command-grid">
+                            <div class="command-card">
+                                <h4><code>/tools</code></h4>
+                                <p>列出当前会话所有可用的工具及其状态（启用/禁用）</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/extensions</code></h4>
+                                <p>列出当前活动的扩展</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/init</code></h4>
+                                <p>分析当前项目并创建一个量身定制的 <code>GEMINI.MD</code> 文件</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/mcp</code></h4>
+                                <p>管理与模型上下文协议 (MCP) 服务器的连接</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/ide</code></h4>
+                                <p>控制与 IDE 的集成功能</p>
+                                <ul class="command-list">
+                                    <li><code>/ide enable</code>: 启用集成</li>
+                                    <li><code>/ide disable</code>: 禁用集成</li>
+                                </ul>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/setup-github</code></h4>
+                                <p>帮助您在当前的 Git 仓库中配置 Gemini-CLI 的 GitHub Actions 工作流</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/yolo</code></h4>
+                                <p>"You Only Look Once" 模式。启用后，工具执行无需手动确认</p>
+                                <div class="warning">⚠️ 请谨慎使用</div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>四、配置与信息</h3>
+                        <div class="command-grid">
+                            <div class="command-card">
+                                <h4><code>/help</code> 或 <code>/?</code></h4>
+                                <p>显示所有可用的斜杠命令及其简要说明</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/about</code></h4>
+                                <p>显示 Gemini-CLI 的版本号和相关的官方链接</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/auth</code></h4>
+                                <p>管理您的身份验证方式</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/settings</code></h4>
+                                <p>打开全局 <code>settings.json</code> 配置文件或显示其路径</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/stats</code></h4>
+                                <p>显示当前会话的详细统计数据</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/theme</code></h4>
+                                <p>更改 CLI 界面的颜色主题</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/docs</code></h4>
+                                <p>在您的默认浏览器中打开 Gemini-CLI 的官方完整文档页面</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/editor</code></h4>
+                                <p>设置当 Gemini 需要打开文件时使用的默认命令行编辑器</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/bug</code></h4>
+                                <p>引导您报告一个 Bug</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/feedback</code></h4>
+                                <p>提供一个快速的渠道来提交关于 Gemini-CLI 使用体验的反馈</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/log</code></h4>
+                                <p>显示日志文件的路径或内容</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/privacy</code></h4>
+                                <p>显示隐私政策声明</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>五、特殊模式与切换</h3>
+                        <div class="command-grid">
+                            <div class="command-card">
+                                <h4><code>/vim</code></h4>
+                                <p>开启或关闭 Vim 模式，允许在输入时使用 Vim 快捷键</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/corgi</code></h4>
+                                <p>切换 Corgi 模式，一个有趣的彩蛋功能 🐶</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/restore</code></h4>
+                                <p>撤销由工具对项目所做的更改（需在启动时使用 <code>--checkpointing</code> 标志）</p>
+                            </div>
+
+                            <div class="command-card">
+                                <h4><code>/quit</code> 或 <code>/exit</code></h4>
+                                <p>退出 Gemini-CLI 交互式会话</p>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 第四部分：高级技巧 -->
+                <section id="advanced" class="section">
+                    <h2>第四部分：高级技巧与工作流</h2>
+
+                    <div class="workflow-section">
+                        <h3>1. 代码调试工作流</h3>
+                        <div class="workflow-steps">
+                            <div class="workflow-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    使用 <code>@/path/to/file.py</code> 载入问题代码
+                                </div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    提问："分析这段代码可能出现的 IndexError 异常，并给出修复建议。"
+                                </div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    使用 <code>!pytest tests/</code> 运行相关测试
+                                </div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    让 Gemini 直接生成修复后的代码，并使用 <code>/copy</code> 粘贴
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workflow-section">
+                        <h3>2. 自动化文档生成</h3>
+                        <div class="workflow-steps">
+                            <div class="workflow-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    在项目根目录创建 <code>GEMINI.MD</code>，写入指令："所有文档需为 Markdown 格式，包含代码示例。"
+                                </div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    运行 <code>/memory refresh</code> 加载指令
+                                </div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    提问："请为 <code>@./src/</code> 目录下的所有模块生成 API 文档。"
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workflow-section">
+                        <h3>3. 项目重构工作流</h3>
+                        <div class="workflow-steps">
+                            <div class="workflow-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    使用 <code>@./src/</code> 加载整个源码目录
+                                </div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    提问："分析代码结构，建议重构方案以提高可维护性"
+                                </div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    让 Gemini 生成具体的重构代码，并逐个文件应用修改
+                                </div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    使用 <code>!npm test</code> 验证重构后的代码功能正常
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workflow-section">
+                        <h3>4. 性能优化工作流</h3>
+                        <div class="workflow-steps">
+                            <div class="workflow-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    运行 <code>!npm run build</code> 构建项目并分析输出
+                                </div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    使用 <code>@package.json @webpack.config.js</code> 加载配置文件
+                                </div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    提问："基于当前配置，建议性能优化策略"
+                                </div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    实施建议的优化方案，并使用 <code>!npm run analyze</code> 验证效果
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="workflow-section">
+                        <h3>5. 团队协作工作流</h3>
+                        <div class="workflow-steps">
+                            <div class="workflow-step">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    使用 <code>/setup-github</code> 配置 GitHub Actions 工作流
+                                </div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    创建团队共享的 <code>GEMINI.MD</code> 文件，定义编码规范和项目约定
+                                </div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    使用 <code>@CONTRIBUTING.md</code> 生成贡献指南和代码审查清单
+                                </div>
+                            </div>
+                            <div class="workflow-step">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    定期使用 <code>/stats</code> 监控项目开发进度和代码质量指标
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 第五部分：深度自定义 -->
+                <section id="customization" class="section">
+                    <h2>第五部分：深度自定义</h2>
+
+                    <div class="subsection">
+                        <h3>1. 配置 settings.json</h3>
+                        <p>运行 <code>/settings</code> 找到并打开配置文件。</p>
+
+                        <div class="config-example">
+                            <h4>常用配置项：</h4>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-title">settings.json</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                </div>
+                                <pre><code class="language-json">{
+  "model": "gemini-1.5-pro-latest",
+  "temperature": 0.8,
+  "tools": {
+    "shell": {
+      "execute": false
+    }
+  }
+}</code></pre>
+                            </div>
+                            <ul class="config-list">
+                                <li><strong>修改默认模型</strong>: <code>"model": "gemini-1.5-pro-latest"</code></li>
+                                <li><strong>调整创造性</strong>: <code>"temperature": 0.8</code></li>
+                                <li><strong>禁用危险工具</strong>: <code>"tools": { "shell": { "execute": false } }</code>
+                                </li>
+                            </ul>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>2. 创建自定义斜杠命令</h3>
+                        <p>您可以创建自己的自定义命令来扩展 Gemini-CLI 的功能。</p>
+
+                        <div class="step-list">
+                            <div class="step-item">
+                                <div class="step-number">1</div>
+                                <div class="step-content">
+                                    找到您的命令目录（通常是 <code>~/.gemini/commands</code>）
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">2</div>
+                                <div class="step-content">
+                                    在该目录下创建一个名为 <code>deploy</code> 的可执行脚本文件
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">3</div>
+                                <div class="step-content">
+                                    <div class="code-block">
+                                        <div class="code-header">
+                                            <span class="code-title">deploy 脚本示例</span>
+                                            <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                        </div>
+                                        <pre><code class="language-bash">#!/bin/bash
+echo "🚀 开始部署项目..."
+# 在此添加您的部署命令，例如：
+# gcloud app deploy
+echo "✅ 部署完成！"</code></pre>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">4</div>
+                                <div class="step-content">
+                                    赋予执行权限：<code>chmod +x ~/.gemini/commands/deploy</code>
+                                </div>
+                            </div>
+                            <div class="step-item">
+                                <div class="step-number">5</div>
+                                <div class="step-content">
+                                    重启 Gemini-CLI，现在您就可以直接运行 <code>/deploy</code> 了！
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>3. 高级配置示例</h3>
+                        <p>针对不同使用场景的高级配置示例：</p>
+
+                        <div class="config-example">
+                            <h4>开发环境配置：</h4>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-title">development-settings.json</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                </div>
+                                <pre><code class="language-json">{
+  "model": "gemini-1.5-pro-latest",
+  "temperature": 0.7,
+  "maxTokens": 8192,
+  "tools": {
+    "shell": {
+      "execute": true,
+      "workingDirectory": "./"
+    },
+    "filesystem": {
+      "read": true,
+      "write": true
+    }
+  },
+  "memory": {
+    "autoLoad": true,
+    "paths": ["GEMINI.MD", "docs/*.md"]
+  },
+  "ide": {
+    "integration": true,
+    "editor": "code"
+  }
+}</code></pre>
+                            </div>
+                        </div>
+
+                        <div class="config-example">
+                            <h4>生产环境配置：</h4>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-title">production-settings.json</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                </div>
+                                <pre><code class="language-json">{
+  "model": "gemini-1.5-pro-latest",
+  "temperature": 0.3,
+  "maxTokens": 4096,
+  "tools": {
+    "shell": {
+      "execute": false
+    },
+    "filesystem": {
+      "read": true,
+      "write": false
+    }
+  },
+  "safety": {
+    "confirmBeforeExecution": true,
+    "restrictedCommands": ["rm", "del", "format"]
+  },
+  "logging": {
+    "level": "info",
+    "auditTrail": true
+  }
+}</code></pre>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="subsection">
+                        <h3>4. GEMINI.MD 最佳实践</h3>
+                        <p>创建高质量的 GEMINI.MD 文件来优化 AI 助手的表现：</p>
+
+                        <div class="config-example">
+                            <h4>项目级 GEMINI.MD 示例：</h4>
+                            <div class="code-block">
+                                <div class="code-header">
+                                    <span class="code-title">GEMINI.MD</span>
+                                    <button class="copy-btn" onclick="copyCode(this)">复制</button>
+                                </div>
+                                <pre><code class="language-markdown"># 项目配置
+
+## 技术栈
+- Frontend: React 18 + TypeScript
+- Backend: Node.js + Express
+- Database: PostgreSQL
+- Testing: Jest + React Testing Library
+
+## 编码规范
+- 使用 TypeScript strict 模式
+- 组件命名采用 PascalCase
+- 函数命名采用 camelCase
+- 所有公共 API 需要注释
+- 优先使用函数式组件
+
+## 文件结构
+```
+src/
+├── components/     # 可复用组件
+├── pages/          # 页面组件
+├── hooks/          # 自定义 Hook
+├── utils/          # 工具函数
+├── types/          # TypeScript 类型定义
+└── tests/          # 测试文件
+```
+
+## 开发流程
+1. 创建 feature 分支
+2. 完成开发并编写测试
+3. 运行 `npm test` 确保所有测试通过
+4. 提交 PR 等待代码审查</code></pre>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 第六部分：FAQ -->
+                <section id="faq" class="section">
+                    <h2>第六部分：常见问题解答 (FAQ)</h2>
+
+                    <div class="faq-list">
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Q: 安装时出现权限错误怎么办？</h4>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p><strong>A:</strong> 尝试修复 npm 的全局包权限，避免直接使用 <code>sudo</code>。可以采取以下方法：</p>
+                                <ul>
+                                    <li><strong>Windows</strong>: 以管理员身份运行命令提示符</li>
+                                    <li><strong>macOS/Linux</strong>: 使用
+                                        <code>npm config set prefix ~/.npm-global</code> 设置全局目录
+                                    </li>
+                                    <li><strong>更改所有者</strong>: <code>sudo chown -R $(whoami) ~/.npm</code></li>
+                                    <li><strong>使用 nvm</strong>: 考虑使用 Node Version Manager 管理 Node.js 版本</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Q: Gemini 似乎没有理解我的项目文件？</h4>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p><strong>A:</strong> 如果 Gemini 没有理解您的项目文件，请检查以下几点：</p>
+                                <ul>
+                                    <li><strong>检查文件路径</strong>: 确认 <code>@./path/to/file</code> 路径正确</li>
+                                    <li><strong>使用相对路径</strong>: 建议使用 <code>@./src/</code> 而不是绝对路径</li>
+                                    <li><strong>检查上下文</strong>: 使用 <code>/context show</code> 查看当前上下文</li>
+                                    <li><strong>创建 GEMINI.MD</strong>: 在项目根目录创建该文件说明项目结构</li>
+                                    <li><strong>重新加载</strong>: 使用 <code>/memory refresh</code> 重新加载配置</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Q: 如何重置认证信息？</h4>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p><strong>A:</strong> 重置认证信息可以通过以下方式：</p>
+                                <ul>
+                                    <li><strong>使用命令</strong>: 运行 <code>/auth</code> 命令进入认证管理</li>
+                                    <li><strong>手动删除</strong>: 删除 <code>~/.gemini/auth</code> 文件夹</li>
+                                    <li><strong>清除缓存</strong>: 运行 <code>gemini --clear-auth</code>（如果支持）</li>
+                                    <li><strong>重新登录</strong>: 重启 Gemini-CLI 并选择新的认证方式</li>
+                                    <li><strong>检查权限</strong>: 确保 Google 账户有 Gemini API 访问权限</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Q: 如何优化 Gemini-CLI 的性能？</h4>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p><strong>A:</strong> 可以通过以下方式优化：</p>
+                                <ul>
+                                    <li>降低 <code>temperature</code> 值以获得更一致的结果</li>
+                                    <li>设置适当的 <code>maxTokens</code> 限制</li>
+                                    <li>使用 <code>/compress</code> 压缩长对话历史</li>
+                                    <li>合理组织 GEMINI.MD 文件内容</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Q: 可以在没有网络的情况下使用吗？</h4>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p><strong>A:</strong> Gemini-CLI 需要网络连接才能与 AI 模型通信。但是部分本地功能（如文件操作、项目管理）仍然可以使用。</p>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Q: 如何处理敏感代码和数据？</h4>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p><strong>A:</strong> 建议采取以下措施：</p>
+                                <ul>
+                                    <li>在生产环境中禁用文件写入功能</li>
+                                    <li>使用 <code>.gitignore</code> 排除敏感文件</li>
+                                    <li>在 GEMINI.MD 中明确数据处理规则</li>
+                                    <li>定期审查会话历史和日志</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Q: 支持哪些编程语言和框架？</h4>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p><strong>A:</strong> Gemini-CLI 支持几乎所有主流编程语言和框架，包括但不限于：</p>
+                                <ul>
+                                    <li>JavaScript/TypeScript（React, Vue, Angular）</li>
+                                    <li>Python（Django, Flask, FastAPI）</li>
+                                    <li>Java（Spring, Spring Boot）</li>
+                                    <li>C#（.NET, ASP.NET）</li>
+                                    <li>Go, Rust, PHP 等</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Q: 如何处理大型项目和复杂代码库？</h4>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p><strong>A:</strong> 对于大型项目，建议采用以下策略：</p>
+                                <ul>
+                                    <li><strong>分模块处理</strong>: 使用 <code>@./src/components/</code> 逐个模块分析</li>
+                                    <li><strong>创建多个 GEMINI.MD</strong>: 在不同模块目录下创建特定配置</li>
+                                    <li><strong>使用指令集</strong>: 创建自定义命令简化常用操作</li>
+                                    <li><strong>合理使用 Token</strong>: 设置 <code>maxTokens</code> 限制避免超出上限</li>
+                                    <li><strong>使用缓存</strong>: 利用 <code>/chat save</code> 保存上下文</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Q: 在 CI/CD 环境中如何使用 Gemini-CLI？</h4>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p><strong>A:</strong> 在 CI/CD 中使用 Gemini-CLI 需要注意以下几点：</p>
+                                <ul>
+                                    <li><strong>环境变量</strong>: 设置 <code>GEMINI_API_KEY</code> 作为秘密变量</li>
+                                    <li><strong>非交互模式</strong>: 使用 <code>--non-interactive</code> 标志</li>
+                                    <li><strong>禁用危险操作</strong>: 在配置中禁用文件写入和 Shell 执行</li>
+                                    <li><strong>使用 Docker</strong>: 创建包含 Gemini-CLI 的容器镜像</li>
+                                    <li><strong>日志记录</strong>: 启用详细日志以便调试</li>
+                                </ul>
+                            </div>
+                        </div>
+
+                        <div class="faq-item">
+                            <div class="faq-question">
+                                <h4>Q: 遇到网络连接或 API 限制问题怎么办？</h4>
+                                <span class="faq-icon">+</span>
+                            </div>
+                            <div class="faq-answer">
+                                <p><strong>A:</strong> 如果遇到网络或 API 问题，可以尝试：</p>
+                                <ul>
+                                    <li><strong>检查网络</strong>: 确保网络连接稳定且可访问 Google 服务</li>
+                                    <li><strong>重试机制</strong>: 使用 <code>--retry</code> 参数启用自动重试</li>
+                                    <li><strong>调整超时</strong>: 增加 <code>timeout</code> 设置值</li>
+                                    <li><strong>检查配额</strong>: 登录 Google Cloud Console 检查 API 使用情况</li>
+                                    <li><strong>使用代理</strong>: 如需要，配置 HTTP 代理设置</li>
+                                </ul>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- 结语 -->
+                <section class="conclusion">
+                    <div class="conclusion-content">
+                        <h2>结语</h2>
+                        <p>您已经完成了 Gemini-CLI 的终极教程。但真正的掌握来自于不断的实践。现在，就把它应用到您的日常工作中，探索它与您的个人工作流相结合的无限可能。祝您编码愉快！</p>
+                        <div class="conclusion-actions">
+                            <a href="#installation" class="btn btn-primary">重新开始学习</a>
+                            <a href="https://github.com/google/gemini-cli" class="btn btn-secondary" target="_blank">
+                                访问 GitHub
+                            </a>
+                        </div>
+                    </div>
+                </section>
+            </article>
+        </div>
+    </main>
+
+    <script src="script.js"></script>
+</body>
+
+</html>
