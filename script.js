@@ -195,38 +195,98 @@ function initializeActiveSection() {
     const tocLinks = document.querySelectorAll('.toc-link, .toc-sublink');
     const navLinks = document.querySelectorAll('.nav-link');
 
+    let currentActiveSection = null;
+
     // 创建Intersection Observer
     const observer = new IntersectionObserver((entries) => {
+        // 找到最靠近视口顶部的可见section
+        let topMostSection = null;
+        let topMostPosition = Infinity;
+
         entries.forEach(entry => {
             if (entry.isIntersecting) {
-                const sectionId = entry.target.id;
+                const rect = entry.boundingClientRect;
+                const distanceFromTop = Math.abs(rect.top);
 
-                // 更新TOC链接状态
-                tocLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
-
-                // 更新导航链接状态
-                navLinks.forEach(link => {
-                    link.classList.remove('active');
-                    if (link.getAttribute('href') === `#${sectionId}`) {
-                        link.classList.add('active');
-                    }
-                });
+                if (distanceFromTop < topMostPosition) {
+                    topMostPosition = distanceFromTop;
+                    topMostSection = entry.target;
+                }
             }
         });
+
+        // 如果找到了新的最顶部section，且与当前激活的不同
+        if (topMostSection && topMostSection !== currentActiveSection) {
+            currentActiveSection = topMostSection;
+            const sectionId = topMostSection.id;
+
+            // 更新TOC链接状态
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+
+            // 更新导航链接状态
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
     }, {
-        threshold: 0.3,
-        rootMargin: '-80px 0px -80px 0px'
+        threshold: [0, 0.1, 0.3, 0.5, 0.7, 1.0],
+        rootMargin: '-10% 0px -70% 0px'
     });
 
     // 观察所有章节
     sections.forEach(section => {
         observer.observe(section);
     });
+
+    // 手动检查初始状态
+    setTimeout(() => {
+        const viewportHeight = window.innerHeight;
+        const navbarHeight = document.querySelector('.navbar').offsetHeight;
+
+        let initialActiveSection = null;
+        let minDistance = Infinity;
+
+        sections.forEach(section => {
+            const rect = section.getBoundingClientRect();
+            const sectionTop = rect.top - navbarHeight;
+
+            // 如果section在视口中且距离顶部最近
+            if (sectionTop <= viewportHeight * 0.3 && rect.bottom >= navbarHeight) {
+                const distance = Math.abs(sectionTop);
+                if (distance < minDistance) {
+                    minDistance = distance;
+                    initialActiveSection = section;
+                }
+            }
+        });
+
+        if (initialActiveSection) {
+            currentActiveSection = initialActiveSection;
+            const sectionId = initialActiveSection.id;
+
+            tocLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+
+            navLinks.forEach(link => {
+                link.classList.remove('active');
+                if (link.getAttribute('href') === `#${sectionId}`) {
+                    link.classList.add('active');
+                }
+            });
+        }
+    }, 100);
 }
 
 // 窗口大小变化处理
@@ -242,12 +302,15 @@ window.addEventListener('resize', function () {
     }
 });
 
-// 滚动时的导航栏效果
+// 滚动时的导航栏效果和导航定位
 let lastScrollTop = 0;
+let navigationUpdateTimeout = null;
+
 window.addEventListener('scroll', function () {
     const navbar = document.querySelector('.navbar');
     const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
 
+    // 导航栏显示/隐藏效果
     if (scrollTop > lastScrollTop && scrollTop > 100) {
         // 向下滚动，隐藏导航栏
         navbar.style.transform = 'translateY(-100%)';
@@ -257,19 +320,64 @@ window.addEventListener('scroll', function () {
     }
 
     lastScrollTop = scrollTop;
+
+    // 防抖动地更新导航状态
+    if (navigationUpdateTimeout) {
+        clearTimeout(navigationUpdateTimeout);
+    }
+
+    navigationUpdateTimeout = setTimeout(() => {
+        updateActiveNavigation();
+    }, 50);
 });
 
-// 添加搜索高亮样式
-const highlightStyle = document.createElement('style');
-highlightStyle.textContent = `
-    .highlight-search {
-        background-color: #ffeb3b;
-        padding: 2px 4px;
-        border-radius: 2px;
-        font-weight: bold;
+// 更新激活导航状态的函数
+function updateActiveNavigation() {
+    const sections = document.querySelectorAll('section[id]');
+    const tocLinks = document.querySelectorAll('.toc-link, .toc-sublink');
+    const navLinks = document.querySelectorAll('.nav-link');
+    const navbarHeight = document.querySelector('.navbar').offsetHeight;
+    const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+
+    let activeSection = null;
+    let minDistance = Infinity;
+
+    sections.forEach(section => {
+        const rect = section.getBoundingClientRect();
+        const sectionTop = rect.top + scrollTop;
+        const distance = Math.abs(sectionTop - scrollTop - navbarHeight - 20);
+
+        // 如果section在视口中或即将进入视口
+        if (rect.top <= navbarHeight + 100 && rect.bottom >= navbarHeight) {
+            if (distance < minDistance) {
+                minDistance = distance;
+                activeSection = section;
+            }
+        }
+    });
+
+    if (activeSection) {
+        const sectionId = activeSection.id;
+
+        // 更新TOC链接状态
+        tocLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('active');
+            }
+        });
+
+        // 更新导航链接状态
+        navLinks.forEach(link => {
+            link.classList.remove('active');
+            if (link.getAttribute('href') === `#${sectionId}`) {
+                link.classList.add('active');
+            }
+        });
     }
-`;
-document.head.appendChild(highlightStyle);
+}
+
+
 
 // 全局函数：复制代码（供HTML中的onclick使用）
 function copyCode(button) {
